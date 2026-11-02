@@ -1,0 +1,48 @@
+    1  cat /etc/fedora-release
+    2  groupadd students
+    3  useradd -m -u 1234 -G students -s /bin/bash -K SUB_UID_COUNT=0 -K SUB_GID_COUNT=0 user1
+    4  passwd user1
+    5  chage -M 90 user1
+    6  id user1
+    7  chage -l user1
+    8  cp /etc/passwd ~/passwd
+    9  cp /etc/shadow ~/shadow
+   10  cp /etc/group ~/group
+   11  find / -type f -perm -4000 > ~/suid.txt
+   12  cat ~/suid.txt
+   13  ps -eo pid,ruid,euid,ruser,user,comm | awk 'NR == 1 || ($2 >= 1000 && $2 != 65534 && $3 == 0)'
+   14  ps -eo pid,ruid,euid,ruser,user,comm | awk 'NR == 1 || ($2 >= 1000 && $2 != 65534 && $3 == 0)' > ~/processes.out
+   15  cat ~/processes.out
+   16  cp /usr/bin/cat /home/user1/cat-suid
+   17  chown root:root /home/user1/cat-suid
+   18  chmod 4755 /home/user1/cat-suid
+   19  cp /usr/bin/chown /home/user1/chown-cap
+   20  chown root:root /home/user1/chown-cap
+   21  chmod 755 /home/user1/chown-cap
+   22  setcap cap_chown=ep /home/user1/chown-cap
+   23  getcap /home/user1/chown-cap
+   24  visudo
+   25  visudo -c
+   26  cp /etc/sudoers ~/sudoers
+   27  timedatectl set-ntp false
+   28  timedatectl set-ntp true
+   29  timedatectl status
+   30  history > ~/history.out
+   31  history -a
+   32  reboot
+   33  id user1
+   34  chage -l user1
+   35  ls -ld /home/user1 /home/user1/cat-suid /home/user1/chown-cap
+   36  getcap /home/user1/chown-cap
+   37  visudo -c
+   38  timedatectl status
+   39  getenforce
+   40  stat /home/user1 > ~/stat.out
+   41  stat /home/user1/cat-suid >> ~/stat.out
+   42  stat /home/user1/chown-cap >> ~/stat.out
+   43  getcap /home/user1/chown-cap > ~/getcap.out
+   44  find / -type f -perm -4000 > ~/suid.txt
+   45  command cp -p /home/user1/history.out ~/history-user1.out
+   46  history > ~/history.out
+   47  command cp -p /home/user1/history.out ~/history-user1.out
+   48  history > ~/history.out

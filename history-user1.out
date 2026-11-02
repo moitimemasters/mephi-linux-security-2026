@@ -1,0 +1,27 @@
+    1  passwd
+    2  cat /etc/shadow > /dev/null
+    3  ~/cat-suid /etc/shadow > /dev/null
+    4  echo $?
+    5  touch ~/file-chown-test
+    6  chown nobody ~/file-chown-test
+    7  ~/chown-cap nobody ~/file-chown-test
+    8  ls -l ~/file-chown-test
+    9  sudo -l
+   10  date -u
+   11  date -u -s '+1 minute'
+   12  sudo date -u -s '+1 minute'
+   13  date -u
+   14  history > ~/history.out
+   15  history -a
+   16  ~/cat-suid /etc/shadow > /dev/null
+   17  echo $?
+   18  touch ~/file-after-reboot
+   19  ~/chown-cap nobody ~/file-after-reboot
+   20  ls -l ~/file-after-reboot
+   21  sudo -l
+   22  sudo date -u -s '+1 minute'
+   23  echo $?
+   24  history > ~/history.out
+   25  clear
+   26  echo 372344
+   27  history > ~/history.out
